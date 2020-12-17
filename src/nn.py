@@ -2,7 +2,7 @@ from tools import *
 from statistics import mode
 
 
-def nn(test_img, A, norm):
+def nn(test_img, A, norm, reduced=False):
     z = []
     for img in A:
         if norm == 'cos':
@@ -11,7 +11,10 @@ def nn(test_img, A, norm):
         else:
             z.append(np.linalg.norm(img - test_img, norm))
     x = np.argmin(z)
-    return find_person(x)
+    if reduced:
+        return x + 1
+    else:
+        return find_person(x)
 
 
 def knn(test_img, A, norm, k=5):

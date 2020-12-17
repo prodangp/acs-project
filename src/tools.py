@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
 path = r'C:\Users\info\Desktop\Info Anul III\ACS\Proiect'
-
-
-
+test_img_per_person = 2
+TI = 8
+persons_no = 40
+img_no = test_img_per_person * persons_no
 
 def read_reshape(pgm):
     data = cv2.imread(pgm)
@@ -27,21 +28,46 @@ def training_matrix():
 def find_person(k):
     return int(k/8) + 1
 
+
 def avg_img(A):
-    avg_img = [0.0] * len(A[0])
-    avg_img = np.array(avg_img).astype(np.float64)
+    avg = [0.0] * len(A[0])
+    avg = np.array(avg).astype(np.float64)
     for img in A:
         for pixel in range(0, len(img)):
-            avg_img[pixel] += img[pixel]
-    for pixel in range(0, len(avg_img)):
-        avg_img[pixel] = avg_img[pixel] / len(A)
-    return avg_img
+            avg[pixel] += img[pixel]
+    for pixel in range(0, len(avg)):
+        avg[pixel] = avg[pixel] / len(A)
+    return avg
+
+
+def reduce(A):
+    x = []
+    i = 0
+    resolution = len(A[0])
+    avg = [0.0] * resolution
+    avg = np.array(avg).astype(np.float64)
+    for img in A:
+        if i == TI:
+            i = 0
+            for pixel in range(0, resolution):
+                avg[pixel] = avg[pixel] / TI
+            x.append(avg)
+            avg = np.array([0.0] * resolution).astype(np.float64)
+        for pixel in range(0, resolution):
+            avg[pixel] += img[pixel]
+        i += 1
+    for pixel in range(0, resolution):
+        avg[pixel] = avg[pixel] / TI
+    x.append(avg)
+    x = np.array(x).astype(np.float64)
+    return x
+
 
 def center_data(A):
-    avg_image = avg_img(A)
+    avg = avg_img(A)
     for img_no in range(0, len(A)):
-        A[img_no] = A[img_no] - avg_image
-    return A, avg_image
+        A[img_no] = A[img_no] - avg
+    return A, avg
 
 
 

@@ -1,6 +1,7 @@
 import time
 from nn import *
 from eigenfaces import *
+import lanczos
 
 test_img_per_person = 2
 persons_no = 40
@@ -8,8 +9,8 @@ img_no = test_img_per_person * persons_no
 
 stats = {'nn': {}}
 A = training_matrix()
-algorithm = eigenfaces
-norm = 2
+algorithm = lanczos.test
+norm = 1
 rr = 0
 total_time = 0
 
