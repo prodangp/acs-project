@@ -9,7 +9,7 @@ E = None
 Y = None
 
 
-def hqpb(A, k=50):
+def hqpb(A, k=100):
     b = []
     q = []
     w = []
@@ -17,9 +17,9 @@ def hqpb(A, k=50):
     resolution = len(A.T[0])
     b.append(0)
     q.append(np.array([[0] * resolution]).real.astype(np.float64))
-    q.append(np.array([[1] * resolution]).real.astype(np.float64))
+    q.append(np.array([[0] * resolution]).real.astype(np.float64))
+    q[1][0][0] = 1
     for i in range(0, k):
-
         w.append(np.dot(np.dot(q[i + 1], A), A.T) - b[i] * q[i])
         a.append(np.dot(w[i], q[i+1].T)[0][0])
         w[i] = w[i] - a[i] * q[i + 1]

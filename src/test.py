@@ -2,15 +2,16 @@ import time
 from nn import *
 from eigenfaces import *
 import lanczos
+import tensor_a1
 
 test_img_per_person = 2
 persons_no = 40
 img_no = test_img_per_person * persons_no
 
 stats = {'nn': {}}
-A = training_matrix()
-algorithm = lanczos.test
-norm = 1
+A = training_tensor()
+algorithm = tensor_a1.tensor_a1
+norm = 2
 rr = 0
 total_time = 0
 
@@ -20,7 +21,7 @@ for p in range(1, persons_no + 1):
     for test_image_path in test_images:
         test_image = read_reshape(test_image_path).astype(np.float64)
         tic = time.time()
-        result = algorithm(test_image, A, norm)
+        result = algorithm(test_image, A, norm, tol=0.74)
         toc = time.time()
         total_time += toc - tic
         if result == p:
