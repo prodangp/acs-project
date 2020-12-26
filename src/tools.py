@@ -7,6 +7,7 @@ TI = 8
 persons_no = 40
 img_no = test_img_per_person * persons_no
 
+
 def read_reshape(pgm):
     data = cv2.imread(pgm)
     data = np.reshape(data, (10304, 3))
