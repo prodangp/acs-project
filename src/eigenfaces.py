@@ -69,8 +69,3 @@ def eigenfaces_reduced(test_image, A, norm=2, k=60):
     c_test_image = np.array([np.array(test_image) - avg_image]).T
     test_pr = np.dot(E.T, c_test_image)
     return nn(test_pr.T, Y.T, norm, reduced=True)
-
-
-#test_img = read_reshape(r'C:\Users\info\Desktop\Info Anul III\ACS\Proiect\db\s29\9.pgm').astype(np.float64)
-#A = training_matrix()
-#print(eigenfaces(test_img, A))
