@@ -9,7 +9,7 @@ from sklearn.cluster import AgglomerativeClustering
 
 MEAS_NO = 61
 CLUSTERS_NO = 6
-PATH = r'C:\Users\info\Desktop\Info Anul III\ACS\Proiect\HAPT\RawData'
+PATH = r'..\HAPT\RawData'
 
 
 def get_hapt_data():
