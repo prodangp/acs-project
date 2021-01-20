@@ -1,4 +1,7 @@
 numpy
 scipy
 PyQt5
-cv2
+opencv-python
+scikit-learn
+QtAwesome
+
