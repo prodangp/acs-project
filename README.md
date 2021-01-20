@@ -9,7 +9,7 @@ Pattern Recognition - GUI Face Recognition Algorithms + K-means examples
 - Lanczos
 - Tensors Algorithm
 
-Dataset: ORL (db folder) - 40 persons (400 images)
+Dataset: ORL (db folder) - 40 persons (400 images) \
 Within GUI one can select the Training/Test ratio.
 
 
@@ -19,5 +19,5 @@ Within GUI one can select the Training/Test ratio.
 - K-means (scikit)
 - Hierarchical (scikit)
 
-Dataset: https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+Dataset: https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones \
 Human Activity Recognition Using Smartphones Data Set (HAPT folder)
