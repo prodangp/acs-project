@@ -1,12 +1,14 @@
 import numpy as np
 
-from tools import training_matrix, center_data
+from tools import center_data
 from nn import nn
+from time import time
 
 cA = None
 avg_image = None
 E = None
 Y = None
+ppt = 0
 
 
 def hqpb(A, k=100):
@@ -24,25 +26,28 @@ def hqpb(A, k=100):
         a.append(np.dot(w[i], q[i+1].T)[0][0])
         w[i] = w[i] - a[i] * q[i + 1]
         b.append(np.linalg.norm(w[i]))
-        print(b[i+1])
         q.append(w[i] / b[i+1])
-        print(q[i+2])
     pb = []
     for i in range(2, k+1):
         pb.append(q[i][0])
     return np.array(pb).T.real.astype(np.float64)
 
 
-def test(test_image, A, norm=2):
+def test(test_image, A, norm=2, k=80):
     global cA
     global avg_image
     global E
     global Y
+    global ppt
     if cA is None:
+        tic = time()
         cA, avg_image = center_data(A)
         cA = cA.T
-        E = hqpb(cA)  # High-Quality Pseudo-basis
+        E = hqpb(cA, k)  # High-Quality Pseudo-basis
         Y = np.dot(E.T, cA)
+        toc = time()
+        ppt = toc - tic
+        print("pre-processing time = ", (toc - tic) * 1000, ' ms')
     else:
         pass
     c_test_image = np.array([np.array(test_image-avg_image)]).T
